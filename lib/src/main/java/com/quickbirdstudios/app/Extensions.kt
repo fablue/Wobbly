@@ -14,24 +14,24 @@ import android.widget.ImageView
  */
 
 
-fun View.wobble(overshoot: Number = Wobbly.STANDARD_OVERSHOOT
-                , wobbles: Number = Wobbly.STANDARD_WOBBLES,
+fun View.wobble(wobbles: Number = Wobbly.STANDARD_WOBBLES,
+                overshoot: Number = Wobbly.STANDARD_OVERSHOOT,
                 duration: Long = 1000) {
     val durationPhase1 = (duration * Wobbly.STANDARD_DURATION_RATIO_REVERSE).toLong()
-    val durationPhase2 = (Wobbly.STANDARD_DURATION_RATIO *  duration).toLong()
+    val durationPhase2 = (Wobbly.STANDARD_DURATION_RATIO * duration).toLong()
 
     var firstPhaseCanceled = false
     this.animate()
             .apply {
-                this.scaleX(1+overshoot.toFloat())
-                this.scaleY(1+overshoot.toFloat())
+                this.scaleX(1 + overshoot.toFloat())
+                this.scaleY(1 + overshoot.toFloat())
                 this.interpolator = Wobbly.STANDARD_INTERPOLATOR_SHRINK
                 this.duration = durationPhase1
             }
-            .setListener(object : Animator.AnimatorListener{
+            .setListener(object : Animator.AnimatorListener {
                 override fun onAnimationStart(animation: Animator?) = Unit
                 override fun onAnimationRepeat(animation: Animator?) = Unit
-                override fun onAnimationEnd(animation: Animator?)  = Unit
+                override fun onAnimationEnd(animation: Animator?) = Unit
 
                 override fun onAnimationCancel(animation: Animator?) {
                     firstPhaseCanceled = true
@@ -43,10 +43,10 @@ fun View.wobble(overshoot: Number = Wobbly.STANDARD_OVERSHOOT
     this.postDelayed({
         this.animate()
                 .apply {
-                    if(firstPhaseCanceled) return@postDelayed
+                    if (firstPhaseCanceled) return@postDelayed
                     this.scaleX(1f)
                     this.scaleY(1f)
-                    this.interpolator = Wobbly.interpolator(wobbles=wobbles, overshoot = overshoot)
+                    this.interpolator = Wobbly.interpolator(wobbles = wobbles, overshoot = overshoot)
                     this.duration = durationPhase2
                 }
                 .start()
@@ -54,10 +54,12 @@ fun View.wobble(overshoot: Number = Wobbly.STANDARD_OVERSHOOT
 }
 
 fun ImageView.setWobblyDrawable(drawable: Drawable,
-                                duration: Long = 1000,
-                                wobbles: Number = Wobbly.STANDARD_WOBBLES) {
-    val durationPhase1 = (duration*Wobbly.STANDARD_DURATION_RATIO_REVERSE).toLong()
-    val durationPhase2 = (duration*Wobbly.STANDARD_DURATION_RATIO).toLong()
+                                wobbles: Number = Wobbly.STANDARD_WOBBLES,
+                                overshoot: Number = Wobbly.STANDARD_OVERSHOOT,
+                                duration: Long = 1000
+) {
+    val durationPhase1 = (duration * Wobbly.STANDARD_DURATION_RATIO_REVERSE).toLong()
+    val durationPhase2 = (duration * Wobbly.STANDARD_DURATION_RATIO).toLong()
     var animationCanceled = false
     this.animate()
             .apply {
@@ -66,7 +68,7 @@ fun ImageView.setWobblyDrawable(drawable: Drawable,
                 this.interpolator = Wobbly.STANDARD_INTERPOLATOR_REVERSE
                 this.duration = durationPhase1
             }
-            .setListener(object : Animator.AnimatorListener{
+            .setListener(object : Animator.AnimatorListener {
                 override fun onAnimationRepeat(animation: Animator?) = Unit
                 override fun onAnimationEnd(animation: Animator?) = Unit
                 override fun onAnimationStart(animation: Animator?) = Unit
@@ -79,13 +81,13 @@ fun ImageView.setWobblyDrawable(drawable: Drawable,
             .start()
 
     this.postDelayed({
-        if(animationCanceled) return@postDelayed
+        if (animationCanceled) return@postDelayed
         this.setImageDrawable(drawable)
         this.animate()
                 .apply {
                     this.scaleX(1f)
                     this.scaleY(1f)
-                    this.interpolator = Wobbly.interpolator(wobbles,Wobbly.STANDARD_OVERSHOOT)
+                    this.interpolator = Wobbly.interpolator(wobbles, overshoot)
                     this.duration = durationPhase2
                 }
                 .start()
@@ -122,7 +124,7 @@ fun ObjectAnimator.wobblify(wobbles: Number, overshoot: Number) {
     this.interpolator = Wobbly.interpolator(wobbles, overshoot)
 }
 
-fun ObjectAnimator.wobblify(){
+fun ObjectAnimator.wobblify() {
     this.interpolator = Wobbly.STANDARD_INTERPOLATOR
 }
 

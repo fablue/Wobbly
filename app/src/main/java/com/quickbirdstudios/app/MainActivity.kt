@@ -14,5 +14,10 @@ class MainActivity : AppCompatActivity() {
         val drawableRound = ContextCompat.getDrawable(this, R.drawable.round)
         val drawableRect = ContextCompat.getDrawable(this, R.drawable.rectangular)
 
+
+        test.setOnClickListener { view ->
+            view.wobble()
+        }
+
     }
 }

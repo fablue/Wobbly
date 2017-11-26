@@ -65,7 +65,7 @@ artifactory {
     contextUrl = 'https://repo.quickbirdstudios.com/artifactory'
     publish {
         repository {
-            repoKey = 'libs-snapshot-local'
+            repoKey = 'public'
             username = artifactory_username
             password = artifactory_password
         }

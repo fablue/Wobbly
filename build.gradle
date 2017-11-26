@@ -22,7 +22,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url "https://repo.quickbirdstudios.com/artifactory/libs-snapshot-local" }
+        maven { url "https://repo.quickbirdstudios.com/artifactory/public" }
     }
 }
 
