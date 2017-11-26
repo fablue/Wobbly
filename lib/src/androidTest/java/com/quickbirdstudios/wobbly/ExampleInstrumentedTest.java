@@ -1,4 +1,4 @@
-package com.quickbirdstudios.app;
+package com.quickbirdstudios.wobbly;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

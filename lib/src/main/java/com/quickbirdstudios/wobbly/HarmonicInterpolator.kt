@@ -1,4 +1,4 @@
-package com.quickbirdstudios.app
+package com.quickbirdstudios.wobbly
 
 /**
  * Created by sebastiansellmair on 10.11.17.

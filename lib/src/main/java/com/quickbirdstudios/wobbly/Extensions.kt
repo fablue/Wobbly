@@ -1,4 +1,4 @@
-package com.quickbirdstudios.app
+package com.quickbirdstudios.wobbly
 
 import android.animation.Animator
 import android.animation.ObjectAnimator
